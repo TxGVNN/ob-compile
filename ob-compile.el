@@ -30,7 +30,7 @@
 (require 'ob)
 
 (defgroup ob-compile nil
-  "org-mode blocks for COMPILE."
+  "Org-mode blocks for COMPILE."
   :group 'org)
 
 
@@ -72,3 +72,5 @@
 (add-hook 'compilation-finish-functions #'ob-compile-save-file)
 
 (provide 'ob-compile)
+
+;;; ob-compile.el ends here
