@@ -1,0 +1,9 @@
+---
+name: Trigger
+on: [push, pull_request]
+jobs:
+  true:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Just true
+        run: true
