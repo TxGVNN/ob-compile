@@ -3,8 +3,10 @@
 ;; Copyright (C) 2021 Giap Tran <txgvnn@gmail.com>
 
 ;; Author: Giap Tran <txgvnn@gmail.com>
-;; Keywords: org, ob
-
+;; Homepage: https://github.com/TxGVNN/giaelpa/tree/recipes/ob-compile
+;; Version: 0.1.0
+;; Keywords:  literate programming, reproducible, processes
+;; Package-Requires: ((emacs "24.4"))
 ;; This file is NOT part of GNU Emacs.
 
 ;; This file is free software; you can redistribute it and/or modify
@@ -49,13 +51,9 @@
       (compile (format "true '%s'; %s" params body) t))
     file))
 
-
-;;;###autoload
-(eval-after-load 'org
-  '(add-to-list 'org-src-lang-modes '("compile" . compile)))
-
 (defvar org-babel-default-header-args:compile '())
 
+(add-to-list 'org-babel-tangle-lang-exts '("compile" . "compile"))
 (add-to-list 'org-babel-default-header-args:compile
              '(:results . "output"))
 
