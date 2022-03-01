@@ -44,7 +44,7 @@
   "Orgmode Babel COMPILE evaluate function for `BODY' with `PARAMS'."
   (let* ((file (or (cdr (assoc ':output params)) "")))
     (let ((compilation-buffer-name-function
-           (lambda (arg)
+           (lambda (_)
              (format "*ob-compile:%s*" file))))
       (compile (format "true '%s'; %s" params body) t))
     file))
@@ -59,14 +59,15 @@
 (add-to-list 'org-babel-default-header-args:compile
              '(:results . "output"))
 
-(defun ob-compile-save-file (buffer msg)
-  "Save ob-compile BUFFER to file.MSG."
+(defun ob-compile-save-file (buffer _)
+  "Save ob-compile BUFFER to file."
   (if (equal (substring (buffer-name buffer) 0 12) "*ob-compile:")
       (let* ((bufname (buffer-name buffer))
-             (filename (replace-regexp-in-string "*ob-compile:\\(.+\\)\\*" "\\1" bufname)))
+             (filename (string-trim (replace-regexp-in-string
+                                     "*ob-compile:\\(.+\\)\\*" "\\1" bufname))))
         (unless (equal filename "*ob-compile:*")
           (save-excursion
-            (write-file (format "%s.%s" filename msg) t)
+            (write-file (format "%s" filename) t)
             (rename-buffer bufname))))))
 
 (add-hook 'compilation-finish-functions #'ob-compile-save-file)
