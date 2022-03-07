@@ -28,6 +28,9 @@
 ;; #+begin_src compile :output (format "compile-%s" (format-time-string "%y%m%d-%H%M%S"))
 ;; uname -a
 ;; #+end_src
+;;
+;; To enable saving the output, you have to config:
+;; (add-hook 'compilation-finish-functions #'ob-compile-save-file)
 
 ;;; Code:
 (require 'org)
@@ -69,8 +72,6 @@
           (save-excursion
             (write-file (format "%s" filename) t)
             (rename-buffer bufname))))))
-
-(add-hook 'compilation-finish-functions #'ob-compile-save-file)
 
 (provide 'ob-compile)
 
