@@ -1,6 +1,6 @@
-;;; ob-compile.el --- Run compile by org-mode -*- lexical-binding: t -*-
+;;; ob-compile.el --- Run compile by org-babel -*- lexical-binding: t -*-
 
-;; Copyright (C) 2021 Giap Tran <txgvnn@gmail.com>
+;; Copyright (C) 2022 Giap Tran <txgvnn@gmail.com>
 
 ;; Author: Giap Tran <txgvnn@gmail.com>
 ;; Homepage: https://github.com/TxGVNN/giaelpa/tree/recipes/ob-compile
@@ -23,6 +23,8 @@
 ;; see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
+;; Run compile in org-mode.
+;; Example:
 ;; #+begin_src compile :output (format "compile-%s" (format-time-string "%y%m%d-%H%M%S"))
 ;; uname -a
 ;; #+end_src
