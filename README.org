@@ -1,0 +1,3 @@
+* ob-compile
+[[https://melpa.org/#/github-explorer][file:https://melpa.org/packages/ob-compile-badge.svg]]
+[[http://www.gnu.org/licenses/gpl-3.0.html][http://img.shields.io/:license-gpl3-blue.svg]]
