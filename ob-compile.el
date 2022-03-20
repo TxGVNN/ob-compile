@@ -3,7 +3,7 @@
 ;; Copyright (C) 2022 Giap Tran <txgvnn@gmail.com>
 
 ;; Author: Giap Tran <txgvnn@gmail.com>
-;; Homepage: https://github.com/TxGVNN/giaelpa/tree/recipes/ob-compile
+;; Homepage: https://github.com/TxGVNN/ob-compile
 ;; Version: 0.1.0
 ;; Keywords:  literate programming, reproducible, processes
 ;; Package-Requires: ((emacs "24.4"))
