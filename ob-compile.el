@@ -53,7 +53,7 @@
     (let ((compilation-buffer-name-function
            (lambda (_)
              (format "*ob-compile:%s*" file))))
-      (compile (format "true '%s'; %s" params body) t))
+      (compile (format "true '%s';\n%s" params body) t))
     file))
 
 (defvar org-babel-default-header-args:compile '())
