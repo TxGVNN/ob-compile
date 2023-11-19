@@ -1,8 +1,24 @@
-* ob-compile
+* ob-compile - Run compile by org-babel
 [[https://melpa.org/#/github-explorer][file:https://melpa.org/packages/ob-compile-badge.svg]]
 [[http://www.gnu.org/licenses/gpl-3.0.html][http://img.shields.io/:license-gpl3-blue.svg]]
 
+** Setup
+#+begin_src elisp
+(use-package ob-compile
+  :ensure t :defer t
 
-*** Options
+  ;; ;; To enable saving the output by :output option
+  ;; :config (add-hook 'compilation-finish-functions #'ob-compile-save-file)
+)
+
+#+end_src
+** Usage
 - ~:name~ if set, the buffer is ~*ob-compile:NAME*~
 - ~:output~ if set, the buffer will be save after compilation exit
+
+Example:
+#+begin_src org
+,#+begin_src compile :name uname :output (format "uname-output-%s" (format-time-string "%y%m%d-%H%M%S"))
+uname -a
+,#+end_src
+#+end_src
