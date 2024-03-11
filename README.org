@@ -12,13 +12,16 @@
 )
 
 #+end_src
+
 ** Usage
 - ~:name~ if set, the buffer is ~*ob-compile:NAME*~
 - ~:output~ if set, the buffer will be save after compilation exit
+- ~:comint~ if set to t, the buffer will be in comint mode
+
 
 Example:
 #+begin_src org
-,#+begin_src compile :name uname :output (format "uname-output-%s" (format-time-string "%y%m%d-%H%M%S"))
+,#+begin_src compile :name uname :output uname.txt :comint t
 uname -a
 ,#+end_src
 #+end_src

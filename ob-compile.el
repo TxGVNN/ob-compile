@@ -1,11 +1,11 @@
 ;;; ob-compile.el --- Run compile by org-babel -*- lexical-binding: t -*-
 
-;; Copyright (C) 2022 Giap Tran <txgvnn@gmail.com>
+;; Copyright (C) 2022-2024 Giap Tran <txgvnn@gmail.com>
 
 ;; Author: Giap Tran <txgvnn@gmail.com>
 ;; Homepage: https://github.com/TxGVNN/ob-compile
-;; Version: 0.2
-;; Keywords:  literate programming, reproducible, processes
+;; Version: 0.3
+;; Keywords: literate programming, reproducible, processes, compilation
 ;; Package-Requires: ((emacs "24.4"))
 ;; This file is NOT part of GNU Emacs.
 
@@ -25,7 +25,7 @@
 ;;; Commentary:
 ;; Run compile in org-mode.
 ;; Example:
-;; #+begin_src compile :name uname :output (format "compile-%s" (format-time-string "%y%m%d-%H%M%S"))
+;; #+begin_src compile :name uname :output uname.txt :comint t
 ;; uname -a
 ;; #+end_src
 ;;
@@ -52,11 +52,12 @@
 (defun org-babel-execute:compile (body params)
   "Orgmode Babel COMPILE evaluate function for `BODY' with `PARAMS'."
   (let* ((file (or (cdr (assoc ':output params)) nil))
-         (name (or (cdr (assoc ':name params)) "")))
+         (name (or (cdr (assoc ':name params)) ""))
+         (comint (if (equal (cdr (assoc ':comint params)) "t") t nil)))
     (let ((compilation-buffer-name-function
            (lambda (_)
              (format "*ob-compile:%s*" name))))
-      (compile (format "true '%s';\n%s" params body) t)
+      (compile (format "true '%s';\n%s" params body) comint)
       (when file
         (with-current-buffer (format "*ob-compile:%s*" name)
           (setq-local ob-compile-output file))))
