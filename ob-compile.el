@@ -4,7 +4,7 @@
 
 ;; Author: Giap Tran <txgvnn@gmail.com>
 ;; Homepage: https://github.com/TxGVNN/ob-compile
-;; Version: 0.3
+;; Version: 0.4
 ;; Keywords: literate programming, reproducible, processes, compilation
 ;; Package-Requires: ((emacs "24.4"))
 ;; This file is NOT part of GNU Emacs.
@@ -53,11 +53,13 @@
   "Orgmode Babel COMPILE evaluate function for `BODY' with `PARAMS'."
   (let* ((file (or (cdr (assoc ':output params)) nil))
          (name (or (cdr (assoc ':name params)) ""))
-         (comint (if (equal (cdr (assoc ':comint params)) "t") t nil)))
+         (comint (if (equal (cdr (assoc ':comint params)) "t") t nil))
+         (full-body (org-babel-expand-body:generic
+                     body params (org-babel-variable-assignments:shell params))))
     (let ((compilation-buffer-name-function
            (lambda (_)
              (format "*ob-compile:%s*" name))))
-      (compile (format "true '%s';\n%s" params body) comint)
+      (compile (format "true '%s';\n%s" params full-body) comint)
       (when file
         (with-current-buffer (format "*ob-compile:%s*" name)
           (setq-local ob-compile-output file))))
